@@ -1,16 +1,17 @@
 # DOCKER CONTAINER WITH VREP 3.6.2 + Pyrobot + Pyvrep
 
-## 1. Build the image:
+1. Build the image:
 docker build --tag pyrobot .
 
-## 2. Configure xhost:
+2. Configure xhost:
 xhost +local:docker
 
-## 2. Go into image:
+3. Go into image:
 ./run.sh
 
-## 3. Change permissions for install.sh
-sudo chmod +x install.sh
+4. Change permissions for install.sh
+cd ~
+sudo chown `whoami` install.sh && chmod +x install.sh
 
-## 4. Run
+5. Install everything
 ./install.sh
