@@ -53,15 +53,15 @@ WORKDIR /home/$USERNAME
 RUN sudo chown -R $USERNAME:$USERNAME /home/$USERNAME
 USER $USERNAME
 
-## Part 2: Downloading Conda
-RUN mkdir /home/$USERNAME/conda \
-&& wget --no-verbose -P /home/$USERNAME/conda https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-&& chmod +x conda/Miniconda3-latest-Linux-x86_64.sh
+# ## Part 2: Downloading Conda
+# RUN mkdir /home/$USERNAME/conda \
+# && wget --no-verbose -P /home/$USERNAME/conda https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+# && chmod +x conda/Miniconda3-latest-Linux-x86_64.sh
 
-## Part 3: Installing VREP 3.6.2 and opengl dependencies
+## Part 3: Installing CoppeliaSim Edu 4.1.0 and opengl dependencies
 RUN mkdir /home/$USERNAME/vrep \ 
- && wget --no-verbose -P /home/$USERNAME/vrep https://www.coppeliarobotics.com/files/V-REP_PRO_EDU_V3_6_2_Ubuntu16_04.tar.xz \
- && tar -xvf /home/$USERNAME/vrep/V-REP_PRO_EDU_V3_6_2_Ubuntu16_04.tar.xz \
+ && wget --no-verbose -P /home/$USERNAME/vrep https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_1_0_Ubuntu16_04.tar.xz \
+ && tar -xvf /home/$USERNAME/vrep/CoppeliaSim_Edu_V4_1_0_Ubuntu16_04.tar.xz \
  && sudo apt-get update -y && sudo apt-get install --no-install-recommends -y \
  libgl1-mesa-dev \
  libavcodec-dev \
@@ -77,7 +77,10 @@ RUN mkdir /home/$USERNAME/pyrobot \
 && curl 'https://raw.githubusercontent.com/facebookresearch/pyrobot/master/robots/LoCoBot/install/locobot_install_all.sh' > /home/$USERNAME/pyrobot/locobot_install_all.sh \
 && chmod +x pyrobot/locobot_install_all.sh 
 
-## Part 5: Copying install script in
+## Part 5: Downloading pyrep
+RUN git clone https://github.com/stepjam/PyRep.git 
+
+## Part 6: Copying install script in
 COPY install.sh /home/$USERNAME/install.sh
 
 ## Final environment config

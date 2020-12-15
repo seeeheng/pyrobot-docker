@@ -1,0 +1,12 @@
+        cd $LOCOBOT_FOLDER/src/pyrobot/robots/LoCoBot
+        sudo cp udev_rules/*.rules /etc/udev/rules.d
+        sudo service udev reload
+        sudo service udev restart
+        sudo udevadm trigger
+        sudo usermod -a -G dialout $USER
+
+sudo apt install udev
+"* udev does not support containers, not started"
+
+comment out the part about containers not being supported
+add this to LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu
